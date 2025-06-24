@@ -1,0 +1,34 @@
+{
+  "name": "enhanced-coding-cod-studio",
+  "version": "1.0.0",
+  "description": "AI-powered coding assistant with DeepSeek V3-0324",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node api/chat.js",
+    "deploy": "vercel deploy --prod"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "vercel": "^32.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/enhanced-coding-cod-studio.git"
+  },
+  "keywords": [
+    "ai",
+    "coding",
+    "deepseek",
+    "assistant",
+    "vercel"
+  ],
+  "author": "",
+  "license": "MIT"
+}
