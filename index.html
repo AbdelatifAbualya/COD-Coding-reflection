@@ -877,22 +877,22 @@
      ===================================*/
     const ENHANCED_PROMPTS = {
       // Stage 1: DeepSeek with Chain of Draft
-      stage1_deepseek_cod: () => `You are DeepSeek V3-0324. Analyze the user's request comprehensively using Chain of Draft methodology.
+      stage1_deepseek_cod: () => `You are DeepSeek V3-0324. Analyze the user's request comprehensively and attempt to fully complete the task using Chain of Draft methodology.
 
 INSTRUCTIONS: 
-For each aspect you think about, write your thinking process, then summarize that thinking in a draft of maximum 15 words. You need to deeply analyze:
+Analyze every aspect of the request deeply. For each thinking step, write your reasoning process, then provide a draft summary of maximum 15 words. Think about:
 - What exactly the user is asking for
 - All requirements and constraints
-- Potential implementation approaches
-- Possible edge cases and issues
-- How to ensure 100% completeness
-- Technical considerations
-- Any ambiguities that need clarification
+- Implementation approach and challenges
+- How to solve each challenge
+- Edge cases and potential issues
+- Detailed implementation steps
+- Code snippets for tricky parts
 
 Think step by step, but only keep a minimum draft for each thinking step, with 15 words at most. Return the answer at the end of the response after a separator ####.`,
 
       // Stage 2: Qwen3-30B Analysis
-      stage2_qwen_analysis: (userPrompt, stage1Response) => `You are Qwen3-30B. Your job is to analyze if the previous Chain of Draft response will lead to a solution that 100% addresses the user's request.
+      stage2_qwen_analysis: (userPrompt, stage1Response) => `You are Qwen3-30B. Analyze if the previous Chain of Draft response will lead to a solution that 100% addresses the user's request.
 
 USER REQUEST:
 ${userPrompt}
@@ -901,17 +901,17 @@ PREVIOUS CoD RESPONSE:
 ${stage1Response}
 
 INSTRUCTIONS:
-Analyze step by step using Chain of Draft methodology:
+Use Chain of Draft methodology to analyze:
 - Does the previous response understand ALL parts of the user's request?
 - Are there any missing requirements or overlooked aspects?
 - Will the proposed approach actually solve the complete problem?
 - Are there any gaps in the analysis or solution plan?
-- What specific issues or improvements are needed?
+- What specific improvements or additions are needed?
 
 Think step by step, but only keep a minimum draft for each thinking step, with 15 words at most. Return the answer at the end of the response after a separator ####.`,
 
       // Stage 3: DeepSeek Verification
-      stage3_deepseek_verification: (userPrompt, stage1Response, stage2Analysis) => `You are DeepSeek V3-0324. Review the analysis from Qwen3-30B and determine if you agree with the identified issues.
+      stage3_deepseek_verification: (userPrompt, stage1Response, stage2Analysis) => `You are DeepSeek V3-0324. Review the Qwen3-30B analysis and create an improved approach that addresses all identified issues.
 
 USER REQUEST:
 ${userPrompt}
@@ -923,17 +923,17 @@ QWEN3 ANALYSIS:
 ${stage2Analysis}
 
 INSTRUCTIONS:
-Use Chain of Draft to think through:
-- Is Qwen3's analysis correct about any missing aspects?
-- Do you agree with the identified gaps or issues?
-- What is the correct complete approach that addresses everything?
-- How should the final implementation be structured?
-- What are the key points the final stage must include?
+Use Chain of Draft methodology to:
+- Review and agree/disagree with Qwen3's analysis
+- Address any identified gaps or issues
+- Provide detailed implementation steps
+- Include code snippets for complex parts
+- Ensure the approach is 100% complete
 
 Think step by step, but only keep a minimum draft for each thinking step, with 15 words at most. Return the answer at the end of the response after a separator ####.`,
 
       // Stage 4: Qwen3-30B Final Implementation
-      stage4_qwen_implementation: (userPrompt, allPreviousResponses) => `You are Qwen3-30B. Based on the previous 3-stage analysis, create the final, complete, working code that perfectly fulfills the user's request.
+      stage4_qwen_implementation: (userPrompt, allPreviousResponses) => `You are Qwen3-30B. Based on all previous discussion, create the final, complete implementation.
 
 USER REQUEST:
 ${userPrompt}
@@ -942,13 +942,7 @@ PREVIOUS DISCUSSION:
 ${allPreviousResponses}
 
 INSTRUCTIONS:
-- Review the user's request and all previous analysis
-- Create complete, working code that addresses every requirement identified
-- Focus on delivering clean, executable code with minimal explanation
-- Include only brief comments in the code where necessary
-- Ensure the solution is 100% complete and functional
-
-Provide the final code implementation directly without lengthy explanations:
+Create the final, complete code implementation that addresses the user's request 100%. Take all agreed-upon points from the previous stages and implement them. Provide clean, working, complete code with minimal explanation.
 
 ####
 `
