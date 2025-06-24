@@ -933,7 +933,7 @@ Use Chain of Draft to think through:
 Think step by step, but only keep a minimum draft for each thinking step, with 15 words at most. Return the answer at the end of the response after a separator ####.`,
 
       // Stage 4: Qwen3-30B Final Implementation
-      stage4_qwen_implementation: (userPrompt, allPreviousResponses) => `You are Qwen3-30B. Create the final, complete implementation that addresses the user's request 100%.
+      stage4_qwen_implementation: (userPrompt, allPreviousResponses) => `You are Qwen3-30B. Based on the previous 3-stage analysis, create the final, complete, working code that perfectly fulfills the user's request.
 
 USER REQUEST:
 ${userPrompt}
@@ -942,17 +942,16 @@ PREVIOUS DISCUSSION:
 ${allPreviousResponses}
 
 INSTRUCTIONS:
-Use Chain of Thought (CoT) methodology to think step by step and create a complete solution that covers everything the user asked for, regardless of length or token count. Based on the previous discussion, ensure you address every single requirement and issue that was identified.
+- Review the user's request and all previous analysis
+- Create complete, working code that addresses every requirement identified
+- Focus on delivering clean, executable code with minimal explanation
+- Include only brief comments in the code where necessary
+- Ensure the solution is 100% complete and functional
 
-FORMAT:
-Step 1: [Analyze all requirements thoroughly]
-Step 2: [Plan the complete implementation]
-Step 3: [Consider all discussed issues and solutions]
-[Continue with as many steps as needed...]
+Provide the final code implementation directly without lengthy explanations:
 
 ####
-FINAL COMPLETE IMPLEMENTATION:
-[Provide 100% complete code/solution that fully addresses the user's request]`
+`
     };
 
     /*====================================
